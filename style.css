@@ -146,21 +146,84 @@ nav a:hover {
   gap: 2rem;
 }
 
+/* Skill Category Cards - Add same glow effect as projects */
 .skill-category {
   background: var(--card-bg);
   padding: 2rem;
   border-radius: var(--border-radius);
   border: 1px solid rgba(0, 170, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Glow effect for skill cards (same as projects) */
+.skill-category::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    var(--neon-blue), 
+    var(--neon-purple), 
+    var(--neon-blue));
+  border-radius: calc(var(--border-radius) + 2px);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.skill-category:hover::before {
+  opacity: 1;
+}
+
+.skill-category:hover {
+  transform: translateY(-5px);
+  border-color: transparent;
+  box-shadow: 0 10px 30px rgba(0, 170, 255, 0.3);
+}
+
+/* Skill category content */
 .skill-category h3 {
   color: var(--neon-blue);
   margin-bottom: 1rem;
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+}
+
+.skill-category:hover h3 {
+  color: var(--text-primary);
+  transform: translateX(5px);
 }
 
 .skill-category p {
   color: var(--text-secondary);
   line-height: 1.6;
+  transition: all 0.3s ease;
+}
+
+.skill-category:hover p {
+  color: var(--text-primary);
+}
+
+/* Highlight skill keywords on hover */
+.skill-category:hover strong {
+  color: var(--neon-purple);
+  text-shadow: 0 0 10px rgba(170, 0, 255, 0.5);
+}
+
+/* Add subtle animation to skill icons/titles */
+.skill-category h3::before {
+  content: '▸ ';
+  color: var(--neon-blue);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.skill-category:hover h3::before {
+  opacity: 1;
 }
 
 /* Projects */
@@ -286,4 +349,5 @@ footer {
   .projects-container {
     grid-template-columns: 1fr;
   }
+
 }
